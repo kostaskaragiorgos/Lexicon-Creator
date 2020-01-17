@@ -3,6 +3,7 @@ from tkinter import messagebox as msg
 from tkinter import simpledialog
 import os 
 import csv
+import pandas as pd
 
 class Lexicon_Creator():
     def __init__(self,master):
@@ -56,7 +57,21 @@ class Lexicon_Creator():
         self.master.bind('<Control-i>',lambda event: self.aboutmenu())
         
     def addw(self):
-        pass
+        valam = 0
+        valdes = 0
+        try:
+            if str(self.wordT.get(1.0,END)) or not(not createlex.strip() ):
+                valam = 1
+            else:
+                msg.showerror("Value Error", "Enter a word")
+                self.wordT.delete(0,END)
+        except:
+            msg.showerror("Value Error", "Enter a word")
+            self.wordT.delete(1.0,END)
+        if self.defT.count(1.0,END) == (1,):
+            msg.showerror("Description Error", "Enter a Definition")
+        else:
+            valdes = 1
     
     
     def create_l(self):
@@ -67,6 +82,14 @@ class Lexicon_Creator():
             with open(str(createlex)+str(".csv"), 'a+') as d:
                 thewriter = csv.writer(d)
                 thewriter.writerow(['Word','Definition'])
+            self.wordT.config(state="normal")
+            self.defT.config(state="normal")
+            self.addb.config(state="normal")
+            msg.showinfo("SUCCESS","THE FILE CREATED SUCCESSFULLY")
+
+        else:
+            msg.showerror("ERROR", "THIS FILE ALREADY EXISTS")
+
         
     def load_l(self):
         pass
