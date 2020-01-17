@@ -37,7 +37,7 @@ class Lexicon_Creator():
         self.menu = Menu(self.master)
         
         self.file_menu = Menu(self.menu,tearoff = 0)
-        self.file_menu.add_command(label = "Create Lexicon",accelerator = 'Ctrl + O',command =self.create_l)
+        self.file_menu.add_command(label = "Create Lexicon",command =self.create_l)
         self.file_menu.add_command(label = "Load Lexicon",accelerator = "Ctrl + L",command = self.load_l)
         self.file_menu.add_command(label="Exit",accelerator= 'Alt+F4',command = self.exitmenu)
         self.menu.add_cascade(label = "File",menu=self.file_menu)
@@ -51,7 +51,7 @@ class Lexicon_Creator():
         self.menu.add_cascade(label="Help",menu=self.help_menu)
         
         self.master.config(menu=self.menu)
-        self.master.bind('<Control-o>',lambda event:self.create_l())
+        #self.master.bind('<Control-o>',lambda event:self.create_l())
         self.master.bind('<Control-l>',lambda event:self.load_l())
         self.master.bind('<Alt-F4>',lambda event: self.exitmenu())
         self.master.bind('<Control-F1>',lambda event: self.helpmenu())
@@ -93,6 +93,7 @@ class Lexicon_Creator():
             self.defT.config(state="normal")
             self.addb.config(state="normal")
             msg.showinfo("SUCCESS","THE FILE CREATED SUCCESSFULLY")
+            self.file_menu.entryconfig("Create Lexicon", state="disabled")
 
         else:
             msg.showerror("ERROR", "THIS FILE ALREADY EXISTS")
