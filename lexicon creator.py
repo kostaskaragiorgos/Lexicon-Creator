@@ -5,6 +5,7 @@ import os
 import csv
 import pandas as pd
 
+
 class Lexicon_Creator():
     def __init__(self,master):
         self.master = master
@@ -72,14 +73,20 @@ class Lexicon_Creator():
             msg.showerror("Description Error", "Enter a Definition")
         else:
             valdes = 1
+        if valam == 1 and valdes == 1:
+            with open(str(self.createlex)+str('.csv'), 'a+') as f:
+                thewriter = csv.writer(f)
+                thewriter.writerow([str(self.wordT.get(1.0,END)),self.defT.get(1.0,END)])
+            msg.showinfo("Word info","Word: "+str(self.wordT.get(1.0,END))+"Definition: "+self.defT.get(1.0,END) )
+        
     
     
     def create_l(self):
-        createlex = simpledialog.askstring("NEW LEXICON","Enter the name of the new lexicon", parent = self.master)
-        while createlex == None or (not createlex.strip() ): 
-            createlex = simpledialog.askstring("NEW LEXICON","Enter the name of the new lexicon", parent = self.master)
-        if os.path.exists(createlex+str(".csv")) == False:
-            with open(str(createlex)+str(".csv"), 'a+') as d:
+        self.createlex = simpledialog.askstring("NEW LEXICON","Enter the name of the new lexicon", parent = self.master)
+        while self.createlex == None or (not self.createlex.strip() ): 
+            self.createlex = simpledialog.askstring("NEW LEXICON","Enter the name of the new lexicon", parent = self.master)
+        if os.path.exists(self.createlex+str(".csv")) == False:
+            with open(str(self.createlex)+str(".csv"), 'a+') as d:
                 thewriter = csv.writer(d)
                 thewriter.writerow(['Word','Definition'])
             self.wordT.config(state="normal")
