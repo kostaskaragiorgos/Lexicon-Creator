@@ -39,6 +39,7 @@ class Lexicon_Creator():
         self.file_menu = Menu(self.menu,tearoff = 0)
         self.file_menu.add_command(label = "Create Lexicon",command =self.create_l)
         self.file_menu.add_command(label = "Load Lexicon",command = self.load_l)
+        self.file_menu.add_command(label = "Close File",command = self.cfile,state = "disabled")
         self.file_menu.add_command(label="Exit",accelerator= 'Alt+F4',command = self.exitmenu)
         self.menu.add_cascade(label = "File",menu=self.file_menu)
         
@@ -56,7 +57,20 @@ class Lexicon_Creator():
         self.master.bind('<Alt-F4>',lambda event: self.exitmenu())
         self.master.bind('<Control-F1>',lambda event: self.helpmenu())
         self.master.bind('<Control-i>',lambda event: self.aboutmenu())
-        
+    
+    def cfile(self):
+        self.createlex = ""
+        self.loadlex = ""
+        self.wordT.config(state="disable")
+        self.defT.config(state="disable")
+        self.addb.config(state="disable")
+        self.file_menu.entryconfig("Create Lexicon", state="normal")
+        self.file_menu.entryconfig("Load Lexicon" , state = "normal")
+        self.file_menu.entryconfig("Close File",state = "disable")
+
+        msg.showinfo("SUCCESS", "FILE CLOASED")
+
+ 
     def addw(self):
         valam = 0
         valdes = 0
@@ -95,6 +109,7 @@ class Lexicon_Creator():
             msg.showinfo("SUCCESS","THE FILE CREATED SUCCESSFULLY")
             self.file_menu.entryconfig("Create Lexicon", state="disabled")
             self.file_menu.entryconfig("Load Lexicon" , state = "disabled")
+            self.file_menu.entryconfig("Close File",state = "normal")
 
         else:
             msg.showerror("ERROR", "THIS FILE ALREADY EXISTS")
@@ -112,10 +127,12 @@ class Lexicon_Creator():
             self.addb.config(state="normal")
             self.createlex = self.loadlex # fix 
             msg.showinfo("SUCCESS","THE FILE LOADED SUCCESSFULLY")
-        else:
-            msg.showerror("ERROR", "THERE IS NO FILE NAMED "+ str(self.loadlex+".csv"))
+            self.file_menu.entryconfig("Close File",state = "normal")
             self.file_menu.entryconfig("Create Lexicon", state="disabled")
             self.file_menu.entryconfig("Load Lexicon" , state = "disabled")
+        else:
+            msg.showerror("ERROR", "THERE IS NO FILE NAMED "+ str(self.loadlex+".csv"))
+            
         
 
 
