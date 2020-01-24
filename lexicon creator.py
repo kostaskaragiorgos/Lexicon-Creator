@@ -28,7 +28,7 @@ class Lexicon_Creator():
         self.deflablel = Label(self.master ,text = "Definition")
         self.deflablel.pack()
         
-        self.defT = Text(self.master,height = 3,state="disabled")
+        self.defT = Text(self.master,height = 4,state="disabled")
         self.defT.pack()
         
         self.addb = Button(self.master,text = "ADD",state="disabled",command = self.addw)
