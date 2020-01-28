@@ -117,7 +117,9 @@ class Lexicon_Creator():
         
     def load_l(self):
         f=0
-        self.loadlex = simpledialog.askstring("LOAD LEXICON" , "Enter the name  of the lexicon youb want to load (Case sensitive)")
+        self.loadlex = simpledialog.askstring("LOAD LEXICON" , "Enter the name  of the lexicon you want to load (Case sensitive)")
+        while self.loadlex == None or (not self.loadlex.strip() ): 
+            self.loadlex = simpledialog.askstring("LOAD LEXICON","Enter the name of the lexicon you want to load (Case sensitive)", parent = self.master)
         for i in os.listdir():
             if str(self.loadlex+".csv") == i:
                 f +=1
