@@ -31,9 +31,14 @@ class Lexicon_Creator():
         self.defT = Text(self.master,height = 4,state="disabled")
         self.defT.pack()
         
-        self.addb = Button(self.master,text = "ADD",state="disabled",command = self.addw)
+        
+        self.clearwb = Button(self.master,text ="Clear Word" ,state  = "disabled",command = self.clearwf)
+        self.clearwb.pack()
+
+        self.addb = Button(self.master,text = "Add",state="disabled",command = self.addw)
         self.addb.pack()
         
+
         self.menu = Menu(self.master)
         
         self.file_menu = Menu(self.menu,tearoff = 0)
@@ -55,6 +60,11 @@ class Lexicon_Creator():
         self.master.bind('<Alt-F4>',lambda event: self.exitmenu())
         self.master.bind('<Control-F1>',lambda event: self.helpmenu())
         self.master.bind('<Control-i>',lambda event: self.aboutmenu())
+
+    
+    def clearwf(self):
+        self.wordT.delete(1.0,END)
+
     
     def cfile(self):
         self.createlex = ""
@@ -62,6 +72,7 @@ class Lexicon_Creator():
         self.wordT.config(state="disable")
         self.defT.config(state="disable")
         self.addb.config(state="disable")
+        self.clearwb.config(state = "disable")
         self.file_menu.entryconfig("Create Lexicon", state="normal")
         self.file_menu.entryconfig("Load Lexicon" , state = "normal")
         self.file_menu.entryconfig("Close File",state = "disable")
@@ -72,11 +83,12 @@ class Lexicon_Creator():
         valam = 0
         valdes = 0
         try:
-            if str(self.wordT.get(1.0,END)) or not(not createlex.strip() ):
+            if not str(self.wordT.get(1.0,END)==(1,)) or not(not createlex.strip() ):
                 valam = 1
             else:
                 msg.showerror("Value Error", "Enter a word")
                 self.wordT.delete(1.0,END)
+                self.defT.delete(1.0,END)
         except:
             msg.showerror("Value Error", "Enter a word")
             self.wordT.delete(1.0,END)
@@ -107,6 +119,7 @@ class Lexicon_Creator():
             self.wordT.config(state="normal")
             self.defT.config(state="normal")
             self.addb.config(state="normal")
+            self.clearwb.config(state = "normal")
             msg.showinfo("SUCCESS","THE FILE CREATED SUCCESSFULLY")
             self.file_menu.entryconfig("Create Lexicon", state="disabled")
             self.file_menu.entryconfig("Load Lexicon" , state = "disabled")
@@ -128,6 +141,7 @@ class Lexicon_Creator():
             self.wordT.config(state="normal")
             self.defT.config(state="normal")
             self.addb.config(state="normal")
+            self.clearwb.config(state = "normal")
             self.createlex = self.loadlex # fix 
             msg.showinfo("SUCCESS","THE FILE LOADED SUCCESSFULLY")
             self.file_menu.entryconfig("Close File",state = "normal")
