@@ -40,9 +40,8 @@ class Lexicon_Creator():
         self.addb = Button(self.master,text = "Add",state="disabled",command = self.addw)
         self.addb.pack()
         
-
+        #menu
         self.menu = Menu(self.master)
-        
         self.file_menu = Menu(self.menu,tearoff = 0)
         self.file_menu.add_command(label = "Create Lexicon",command =self.create_l)
         self.file_menu.add_command(label = "Load Lexicon",command = self.load_l)
@@ -65,14 +64,17 @@ class Lexicon_Creator():
 
     
     def cleardf(self):
+        """ clears the definition  text field"""
         self.defT.delete(1.0,END)
 
     
     def clearwf(self):
+        """ clears the word text field"""
         self.wordT.delete(1.0,END)
 
     
     def cfile(self):
+        """ closes the file """
         self.createlex = ""
         self.loadlex = ""
         self.wordT.config(state="disable")
@@ -87,6 +89,7 @@ class Lexicon_Creator():
 
  
     def addw(self):
+        """ adds the word to the lexicon(.csv file) """
         valam = 0
         valdes = 0
         try:
@@ -116,6 +119,7 @@ class Lexicon_Creator():
     
     
     def create_l(self):
+        """ creates a lexicon(.csv file)"""
         self.createlex = simpledialog.askstring("NEW LEXICON","Enter the name of the new lexicon", parent = self.master)
         while self.createlex == None or (not self.createlex.strip() ): 
             self.createlex = simpledialog.askstring("NEW LEXICON","Enter the name of the new lexicon", parent = self.master)
@@ -138,6 +142,7 @@ class Lexicon_Creator():
 
         
     def load_l(self):
+        """loads a lexicon(.csv file)"""
         f=0
         self.loadlex = simpledialog.askstring("LOAD LEXICON" , "Enter the name  of the lexicon you want to load (Case sensitive)")
         while self.loadlex == None or (not self.loadlex.strip() ): 
