@@ -52,8 +52,6 @@ class Lexicon_Creator():
         self.menu.add_cascade(label="Help",menu=self.help_menu)
         
         self.master.config(menu=self.menu)
-        #self.master.bind('<Control-o>',lambda event:self.create_l())
-        #self.master.bind('<Control-l>',lambda event:self.load_l())
         self.master.bind('<Alt-F4>',lambda event: self.exitmenu())
         self.master.bind('<Control-F1>',lambda event: self.helpmenu())
         self.master.bind('<Control-i>',lambda event: self.aboutmenu())
@@ -67,7 +65,6 @@ class Lexicon_Creator():
         self.file_menu.entryconfig("Create Lexicon", state="normal")
         self.file_menu.entryconfig("Load Lexicon" , state = "normal")
         self.file_menu.entryconfig("Close File",state = "disable")
-
         msg.showinfo("SUCCESS", "FILE CLOASED")
 
  
@@ -79,12 +76,14 @@ class Lexicon_Creator():
                 valam = 1
             else:
                 msg.showerror("Value Error", "Enter a word")
-                self.wordT.delete(0,END)
+                self.wordT.delete(1.0,END)
         except:
             msg.showerror("Value Error", "Enter a word")
             self.wordT.delete(1.0,END)
         if self.defT.count(1.0,END) == (1,):
             msg.showerror("Description Error", "Enter a Definition")
+            self.defT.delete(1.0,END)
+            self.wordT.delete(1.0,END)
         else:
             valdes = 1
         if valam == 1 and valdes == 1:
@@ -92,6 +91,8 @@ class Lexicon_Creator():
                 thewriter = csv.writer(f)
                 thewriter.writerow([str(self.wordT.get(1.0,END)),self.defT.get(1.0,END)])
             msg.showinfo("Word info","Word: "+str(self.wordT.get(1.0,END))+"Definition: "+self.defT.get(1.0,END) )
+            self.wordT.delete(1.0,END)
+            self.defT.delete(1.0,END)
         
     
     
@@ -136,8 +137,6 @@ class Lexicon_Creator():
             msg.showerror("ERROR", "THERE IS NO FILE NAMED "+ str(self.loadlex+".csv"))
             
         
-
-
     
     def exitmenu(self):
         if msg.askokcancel("Quit?", "Really quit?"):
