@@ -10,7 +10,7 @@ class Lexicon_Creator():
     def __init__(self,master):
         self.master = master
         self.master.title("Lexicon Creator")
-        self.master.geometry("250x200")
+        self.master.geometry("250x220")
         self.master.resizable(False,False)
         
         if os.path.exists("Lexicons") == False:
@@ -30,7 +30,9 @@ class Lexicon_Creator():
         
         self.defT = Text(self.master,height = 4,state="disabled")
         self.defT.pack()
-        
+
+        self.cleardb  = Button(self.master,text = "Clear Definition", state  ="disabled",command = self.cleardf)
+        self.cleardb.pack()
         
         self.clearwb = Button(self.master,text ="Clear Word" ,state  = "disabled",command = self.clearwf)
         self.clearwb.pack()
@@ -62,6 +64,10 @@ class Lexicon_Creator():
         self.master.bind('<Control-i>',lambda event: self.aboutmenu())
 
     
+    def cleardf(self):
+        self.defT.delete(1.0,END)
+
+    
     def clearwf(self):
         self.wordT.delete(1.0,END)
 
@@ -73,6 +79,7 @@ class Lexicon_Creator():
         self.defT.config(state="disable")
         self.addb.config(state="disable")
         self.clearwb.config(state = "disable")
+        self.cleardb.config(state = "disable")
         self.file_menu.entryconfig("Create Lexicon", state="normal")
         self.file_menu.entryconfig("Load Lexicon" , state = "normal")
         self.file_menu.entryconfig("Close File",state = "disable")
@@ -120,6 +127,7 @@ class Lexicon_Creator():
             self.defT.config(state="normal")
             self.addb.config(state="normal")
             self.clearwb.config(state = "normal")
+            self.cleardb.config(state = "normal")
             msg.showinfo("SUCCESS","THE FILE CREATED SUCCESSFULLY")
             self.file_menu.entryconfig("Create Lexicon", state="disabled")
             self.file_menu.entryconfig("Load Lexicon" , state = "disabled")
@@ -142,7 +150,8 @@ class Lexicon_Creator():
             self.defT.config(state="normal")
             self.addb.config(state="normal")
             self.clearwb.config(state = "normal")
-            self.createlex = self.loadlex # fix 
+            self.cleardb.config(state = "normal")
+            self.createlex = self.loadlex 
             msg.showinfo("SUCCESS","THE FILE LOADED SUCCESSFULLY")
             self.file_menu.entryconfig("Close File",state = "normal")
             self.file_menu.entryconfig("Create Lexicon", state="disabled")
