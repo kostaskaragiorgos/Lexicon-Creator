@@ -5,7 +5,6 @@ import os
 import csv
 import pandas as pd
 
-
 class Lexicon_Creator():
     def __init__(self,master):
         self.master = master
