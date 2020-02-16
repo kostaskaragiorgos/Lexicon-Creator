@@ -47,6 +47,10 @@ class Lexicon_Creator():
         self.file_menu.add_command(label = "Close File",command = self.cfile,state = "disabled")
         self.file_menu.add_command(label="Exit",accelerator= 'Alt+F4',command = self.exitmenu)
         self.menu.add_cascade(label = "File",menu=self.file_menu)
+
+        self.showmenu = Menu(self.menu,tearoff = 0 )
+        self.showmenu.add_command(label = "Show Lexicon")
+        self.menu.add_cascade(label = "Show", menu = self.showmenu)
         
         self.about_menu = Menu(self.menu,tearoff = 0)
         self.about_menu.add_command(label = "About",accelerator= 'Ctrl+I',command=self.aboutmenu)
