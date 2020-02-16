@@ -91,16 +91,12 @@ class Lexicon_Creator():
         """ adds the word to the lexicon(.csv file) """
         valam = 0
         valdes = 0
-        try:
-            if not str(self.wordT.get(1.0,END)==(1,)) or not(not createlex.strip() ):
-                valam = 1
-            else:
-                msg.showerror("Value Error", "Enter a word")
-                self.wordT.delete(1.0,END)
-                self.defT.delete(1.0,END)
-        except:
+        if not str(self.wordT.get(1.0,END)==(1,)) or not(not self.createlex.strip() ):
+            valam = 1
+        else:
             msg.showerror("Value Error", "Enter a word")
             self.wordT.delete(1.0,END)
+            self.defT.delete(1.0,END)
         if self.defT.count(1.0,END) == (1,):
             msg.showerror("Description Error", "Enter a Definition")
             self.defT.delete(1.0,END)
