@@ -7,7 +7,10 @@ from tkinter import simpledialog
 import os 
 import csv
 
-class Lexicon_Creator():
+class LexiconCreator():
+    """
+    Lexicon Creator Class
+    """
     def __init__(self, master):
         self.master = master
         self.master.title("Lexicon Creator")
@@ -113,7 +116,7 @@ class Lexicon_Creator():
             with open(str(self.createlex)+str('.csv'), 'a+') as f:
                 thewriter = csv.writer(f)
                 thewriter.writerow([str(self.wordT.get(1.0, END)),self.defT.get(1.0, END)])
-            msg.showinfo("Word info", "Word: "+str(self.wordT.get(1.0,END))+"Definition: "+self.defT.get(1.0,END) )
+            msg.showinfo("Word info", "Word: "+str(self.wordT.get(1.0, END))+"Definition: "+self.defT.get(1.0, END) )
             self.wordT.delete(1.0, END)
             self.defT.delete(1.0, END)
         
@@ -135,7 +138,7 @@ class Lexicon_Creator():
             self.cleardb.config(state="normal")
             msg.showinfo("SUCCESS", "THE FILE CREATED SUCCESSFULLY")
             self.file_menu.entryconfig("Create Lexicon", state="disabled")
-            self.file_menu.entryconfig("Load Lexicon" , state="disabled")
+            self.file_menu.entryconfig("Load Lexicon", state="disabled")
             self.file_menu.entryconfig("Close File", state="normal")
         else:
             msg.showerror("ERROR", "THIS FILE ALREADY EXISTS")
@@ -143,7 +146,7 @@ class Lexicon_Creator():
         """loads a lexicon(.csv file)"""
         f=0
         self.loadlex = simpledialog.askstring("LOAD LEXICON", "Enter the name  of the lexicon you want to load (Case sensitive)")
-        while self.loadlex == None or (not self.loadlex.strip() ): 
+        while self.loadlex == None or (not self.loadlex.strip()): 
             self.loadlex = simpledialog.askstring("LOAD LEXICON", "Enter the name of the lexicon you want to load (Case sensitive)", parent = self.master)
         for i in os.listdir():
             if str(self.loadlex+".csv") == i:
@@ -174,8 +177,9 @@ class Lexicon_Creator():
         msg.showinfo("About", "Version 1.0")
 
 def main():
+    """ main f """ 
     root = Tk()
-    Lexicon_Creator(root)
+    LexiconCreator(root)
     root.mainloop()
     
 if __name__ == '__main__':
