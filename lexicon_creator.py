@@ -116,7 +116,7 @@ class LexiconCreator():
             with open(str(self.createlex)+str('.csv'), 'a+') as f:
                 thewriter = csv.writer(f)
                 thewriter.writerow([str(self.wordT.get(1.0, END)), self.defT.get(1.0, END)])
-            msg.showinfo("Word info", "Word: "+str(self.wordT.get(1.0, END))+"Definition: "+self.defT.get(1.0, END) )
+            msg.showinfo("Word info", "Word: "+str(self.wordT.get(1.0, END))+"Definition: "+self.defT.get(1.0, END))
             self.wordT.delete(1.0, END)
             self.defT.delete(1.0, END)
         
@@ -124,9 +124,9 @@ class LexiconCreator():
     
     def create_l(self):
         """ creates a lexicon(.csv file)"""
-        self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent = self.master)
+        self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent=self.master)
         while self.createlex == None or (not self.createlex.strip()): 
-            self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent = self.master)
+            self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent=self.master)
         if os.path.exists(self.createlex+str(".csv")) == False:
             with open(str(self.createlex)+str(".csv"), 'a+') as d:
                 thewriter = csv.writer(d)
@@ -144,10 +144,10 @@ class LexiconCreator():
             msg.showerror("ERROR", "THIS FILE ALREADY EXISTS")
     def load_l(self):
         """loads a lexicon(.csv file)"""
-        f=0
+        f = 0
         self.loadlex=simpledialog.askstring("LOAD LEXICON", "Enter the name  of the lexicon you want to load (Case sensitive)")
         while self.loadlex == None: 
-            self.loadlex=simpledialog.askstring("LOAD LEXICON", "Enter the name of the lexicon you want to load (Case sensitive)", parent = self.master)
+            self.loadlex = simpledialog.askstring("LOAD LEXICON", "Enter the name of the lexicon you want to load (Case sensitive)", parent=self.master)
         for i in os.listdir():
             if str(self.loadlex+".csv") == i:
                 f += 1
