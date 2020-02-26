@@ -6,7 +6,7 @@ from tkinter import messagebox as msg
 from tkinter import simpledialog
 import os 
 import csv
-
+import pandas as pd
 class LexiconCreator():
     """
     Lexicon Creator Class
@@ -16,34 +16,25 @@ class LexiconCreator():
         self.master.title("Lexicon Creator")
         self.master.geometry("250x220")
         self.master.resizable(False, False)
-        
         if not(os.path.exists("Lexicons")):
             os.mkdir("Lexicons")
             os.chdir("Lexicons")
         else:
             os.chdir("Lexicons")
-        
         self.wordlabel = Label(self.master, text="Word",)
         self.wordlabel.pack()
-        
         self.wordT = Text(self.master, height=1, state="disabled")
         self.wordT.pack()
-        
         self.deflablel = Label(self.master, text="Definition")
         self.deflablel.pack()
-        
         self.defT = Text(self.master, height=4, state="disabled")
         self.defT.pack()
-
         self.cleardb = Button(self.master, text="Clear Definition", state="disabled", command=self.cleardf)
         self.cleardb.pack()
-        
         self.clearwb = Button(self.master, text="Clear Word", state="disabled", command=self.clearwf)
         self.clearwb.pack()
-
         self.addb = Button(self.master, text="Add", state="disabled", command=self.addw)
         self.addb.pack()
-        
         #menu
         self.menu = Menu(self.master)
         self.file_menu = Menu(self.menu, tearoff=0)
@@ -52,35 +43,30 @@ class LexiconCreator():
         self.file_menu.add_command(label="Close File", command=self.cfile, state="disabled")
         self.file_menu.add_command(label="Exit", accelerator='Alt+F4', command=self.exitmenu)
         self.menu.add_cascade(label="File", menu=self.file_menu)
-
         self.showmenu = Menu(self.menu, tearoff=0)
-        self.showmenu.add_command(label="Show Lexicon")
+        self.showmenu.add_command(label="Show Lexicon", accelerator='Ctrl+T', command=self.showlexicon)
         self.menu.add_cascade(label="Show", menu=self.showmenu)
-        
         self.about_menu = Menu(self.menu, tearoff=0)
         self.about_menu.add_command(label="About", accelerator='Ctrl+I', command=self.aboutmenu)
         self.menu.add_cascade(label="About", menu=self.about_menu)
-        
         self.help_menu = Menu(self.menu, tearoff=0)
         self.help_menu.add_command(label="Help", accelerator='Ctrl+F1', command=self.helpmenu)
         self.menu.add_cascade(label="Help", menu=self.help_menu)
-        
         self.master.config(menu=self.menu)
         self.master.bind('<Alt-F4>', lambda event: self.exitmenu())
         self.master.bind('<Control-F1>', lambda event: self.helpmenu())
         self.master.bind('<Control-i>', lambda event: self.aboutmenu())
-
-    
+        self.master.bind('<Control-t>', lambda event: self.showlexicon())
     def cleardf(self):
         """ clears the definition  text field"""
         self.defT.delete(1.0, END)
-
-    
     def clearwf(self):
         """ clears the word text field"""
         self.wordT.delete(1.0, END)
-
-    
+    def showlexicon(self):
+        """ shows the whole lexicon """
+        df = pd.read_csv(str(self.createlex)+str('.csv'))
+        msg.showinfo("Lexicon Words", df)
     def cfile(self):
         """ closes the file """
         self.createlex = ""
