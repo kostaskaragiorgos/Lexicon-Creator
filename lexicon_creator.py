@@ -16,7 +16,7 @@ class LexiconCreator():
         self.master.title("Lexicon Creator")
         self.master.geometry("250x220")
         self.master.resizable(False, False)
-        if not(os.path.exists("Lexicons")):
+        if not os.path.exists("Lexicons"):
             os.mkdir("Lexicons")
             os.chdir("Lexicons")
         else:
@@ -86,7 +86,7 @@ class LexiconCreator():
         """ adds the word to the lexicon(.csv file) """
         valam = 0
         valdes = 0
-        if not str(self.wordT.get(1.0, END) == (1,)) or not(not self.createlex.strip()):
+        if not str(self.wordT.get(1.0, END) == (1,)) or self.createlex.strip():
             valam = 1
         else:
             msg.showerror("Value Error", "Enter a word")
@@ -111,9 +111,9 @@ class LexiconCreator():
     def create_l(self):
         """ creates a lexicon(.csv file)"""
         self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent=self.master)
-        while self.createlex == None or (not self.createlex.strip()): 
+        while self.createlex is None or (not self.createlex.strip()): 
             self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent=self.master)
-        if os.path.exists(self.createlex+str(".csv")) == False:
+        if not os.path.exists(self.createlex+str(".csv")):
             with open(str(self.createlex)+str(".csv"), 'a+') as d:
                 thewriter = csv.writer(d)
                 thewriter.writerow(['Word', 'Definition'])
@@ -131,8 +131,8 @@ class LexiconCreator():
     def load_l(self):
         """loads a lexicon(.csv file)"""
         f = 0
-        self.loadlex=simpledialog.askstring("LOAD LEXICON", "Enter the name  of the lexicon you want to load (Case sensitive)")
-        while self.loadlex == None: 
+        self.loadlex = simpledialog.askstring("LOAD LEXICON", "Enter the name  of the lexicon you want to load (Case sensitive)")
+        while self.loadlex is None: 
             self.loadlex = simpledialog.askstring("LOAD LEXICON", "Enter the name of the lexicon you want to load (Case sensitive)", parent=self.master)
         for i in os.listdir():
             if str(self.loadlex+".csv") == i:
