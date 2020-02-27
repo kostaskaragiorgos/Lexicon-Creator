@@ -80,34 +80,20 @@ class LexiconCreator():
         self.file_menu.entryconfig("Load Lexicon", state="normal")
         self.file_menu.entryconfig("Close File", state="disable")
         msg.showinfo("SUCCESS", "FILE CLOASED")
-
- 
     def addw(self):
-        """ adds the word to the lexicon(.csv file) """
-        valam = 0
-        valdes = 0
-        if not str(self.wordT.get(1.0, END) == (1,)) or self.createlex.strip():
-            valam = 1
-        else:
-            msg.showerror("Value Error", "Enter a word")
+        if self.wordT.count(1.0, END) == (1, ) or  self.defT.count(1.0, END) == (1, ):
+            msg.showerror("Value Error Description Error", "Enter a word \n Enter a Definition")
             self.wordT.delete(1.0, END)
             self.defT.delete(1.0, END)
-        if self.defT.count(1.0, END) == (1,):
-            msg.showerror("Description Error", "Enter a Definition")
-            self.defT.delete(1.0, END)
-            self.wordT.delete(1.0, END)
         else:
-            valdes = 1
-        if valam == 1 and valdes == 1:
+
             with open(str(self.createlex)+str('.csv'), 'a+') as f:
                 thewriter = csv.writer(f)
                 thewriter.writerow([str(self.wordT.get(1.0, END)), self.defT.get(1.0, END)])
             msg.showinfo("Word info", "Word: "+str(self.wordT.get(1.0, END))+"Definition: "+self.defT.get(1.0, END))
             self.wordT.delete(1.0, END)
             self.defT.delete(1.0, END)
-        
-    
-    
+
     def create_l(self):
         """ creates a lexicon(.csv file)"""
         self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent=self.master)
@@ -157,7 +143,6 @@ class LexiconCreator():
     def helpmenu(self):
         """ help menu """
         msg.showinfo("Help", "Create or load a lexicon from the file menu. Add the word and its definition to the lexicon")
-    
     def aboutmenu(self):
         """ about menu """ 
         msg.showinfo("About", "Version 1.0")
