@@ -22,6 +22,10 @@ Create your own lexicon and save it to a .csv file
 
 <p><img src ="lexicon creator version.png" title = "Lexicon Creator Version"/> </p>
 
+**Radon**
+
+<p><img src = "lexicon_creator cc radon.png" title = "Lexicon Radon"/> </p>
+
 ## Keybinds
 
 <ul>
