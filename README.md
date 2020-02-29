@@ -13,9 +13,11 @@ Create your own lexicon and save it to a .csv file
 
 ## FILES
 <ul>
-<li> lexicon creator.py(the main file) </li>
+<li> lexicon_creator cc radon.png </li>
+<li> lexicon_creator.py(the main file) </li>
 <li> lexicon creator version.png(version file) </li>
 <li> keybinds.txt(keybinds file) </li>
+<li> lexicon_creator.txt(radon cc file) </li>
 </ul> 
 
 **Current Version**
