@@ -2,6 +2,10 @@ File menu
 =============
 Exit Alt + F4
 =============
+Show menu
+=====================
+Show Lexicon Ctrl + T
+=====================
 About menu
 ==============
 About Ctrl + I
