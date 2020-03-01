@@ -1,8 +1,8 @@
 """
 You can create your own lexicon and save it to a .csv file
 """ 
-from tkinter import Label, Text, Button, Menu, Tk, END
-from tkinter import messagebox as msg
+from tkinter import Label, Text, Button, Menu, Tk, END, Toplevel, StringVar
+from tkinter import messagebox as msg, OptionMenu
 from tkinter import simpledialog
 import os 
 import csv
@@ -21,6 +21,7 @@ class LexiconCreator():
             os.chdir("Lexicons")
         else:
             os.chdir("Lexicons")
+        self.createlex = ""
         self.wordlabel = Label(self.master, text="Word",)
         self.wordlabel.pack()
         self.wordT = Text(self.master, height=1, state="disabled")
@@ -46,7 +47,7 @@ class LexiconCreator():
         self.edimenu = Menu(self.menu, tearoff=0)
         self.edimenu.add_command(label="Clear Word", command=self.clearwf)
         self.edimenu.add_command(label="Clear Definition", command=self.cleardf)
-        self.edimenu.add_command(label="Delete Word")
+        self.edimenu.add_command(label="Delete Word", command=self.deleteword)
         self.menu.add_cascade(label="Edit", menu=self.edimenu)
         self.showmenu = Menu(self.menu, tearoff=0)
         self.showmenu.add_command(label="Show Lexicon", accelerator='Ctrl+T', command=self.showlexicon)
@@ -62,6 +63,8 @@ class LexiconCreator():
         self.master.bind('<Control-F1>', lambda event: self.helpmenu())
         self.master.bind('<Control-i>', lambda event: self.aboutmenu())
         self.master.bind('<Control-t>', lambda event: self.showlexicon())
+    def deleteword(self):
+        pass
     def cleardf(self):
         """ clears the definition  text field"""
         self.defT.delete(1.0, END)
@@ -70,8 +73,11 @@ class LexiconCreator():
         self.wordT.delete(1.0, END)
     def showlexicon(self):
         """ shows the whole lexicon """
-        df = pd.read_csv(str(self.createlex)+str('.csv'))
-        msg.showinfo("Lexicon Words", df)
+        if self.createlex == "":
+            msg.showerror("Error", "No Lexicon")
+        else:
+            df = pd.read_csv(str(self.createlex)+str('.csv'))
+            msg.showinfo("Lexicon Words",str(df))
     def cfile(self):
         """ closes the file """
         self.createlex = ""
