@@ -64,7 +64,7 @@ class LexiconCreator():
         self.master.bind('<Control-i>', lambda event: self.aboutmenu())
         self.master.bind('<Control-t>', lambda event: self.showlexicon())
         self.master.bind('<Control-n>',lambda event: self.create_l())
-        #self.master.bind('<Control-l>',lambda event: self.load_l()) todo check the function load_l
+        self.master.bind('<Control-l>',lambda event: self.load_l())
     def deleteword(self):
         pass
     def cleardf(self):
@@ -131,26 +131,29 @@ class LexiconCreator():
                 msg.showerror("ERROR", "THIS FILE ALREADY EXISTS")
     def load_l(self):
         """loads a lexicon(.csv file)"""
-        f = 0
-        self.loadlex = simpledialog.askstring("LOAD LEXICON", "Enter the name  of the lexicon you want to load (Case sensitive)")
-        while self.loadlex is None: 
-            self.loadlex = simpledialog.askstring("LOAD LEXICON", "Enter the name of the lexicon you want to load (Case sensitive)", parent=self.master)
-        for i in os.listdir():
-            if str(self.loadlex+".csv") == i:
-                f += 1
-        if f > 0:
-            self.wordT.config(state="normal")
-            self.defT.config(state="normal")
-            self.addb.config(state="normal")
-            self.clearwb.config(state="normal")
-            self.cleardb.config(state="normal")
-            self.createlex = self.loadlex 
-            msg.showinfo("SUCCESS", "THE FILE LOADED SUCCESSFULLY")
-            self.file_menu.entryconfig("Close File", state="normal")
-            self.file_menu.entryconfig("Create Lexicon", state="disabled")
-            self.file_menu.entryconfig("Load Lexicon", state="disabled")
+        if  self.createlex != "":
+            msg.showerror("Error", "Lexicon already created or loaded")
         else:
-            msg.showerror("ERROR", "THERE IS NO FILE NAMED "+ str(self.loadlex+".csv"))
+            f = 0
+            self.loadlex = simpledialog.askstring("LOAD LEXICON", "Enter the name  of the lexicon you want to load (Case sensitive)")
+            while self.loadlex is None: 
+                self.loadlex = simpledialog.askstring("LOAD LEXICON", "Enter the name of the lexicon you want to load (Case sensitive)", parent=self.master)
+            for i in os.listdir():
+                if str(self.loadlex+".csv") == i:
+                    f += 1
+            if f > 0:
+                self.wordT.config(state="normal")
+                self.defT.config(state="normal")
+                self.addb.config(state="normal")
+                self.clearwb.config(state="normal")
+                self.cleardb.config(state="normal")
+                self.createlex = self.loadlex 
+                msg.showinfo("SUCCESS", "THE FILE LOADED SUCCESSFULLY")
+                self.file_menu.entryconfig("Close File", state="normal")
+                self.file_menu.entryconfig("Create Lexicon", state="disabled")
+                self.file_menu.entryconfig("Load Lexicon", state="disabled")
+            else:
+                msg.showerror("ERROR", "THERE IS NO FILE NAMED "+ str(self.loadlex+".csv"))
     def exitmenu(self):
         """ exit menu """
         if msg.askokcancel("Quit?", "Really quit?"):
@@ -161,7 +164,6 @@ class LexiconCreator():
     def aboutmenu(self):
         """ about menu """ 
         msg.showinfo("About", "Version 1.0")
-
 def main():
     """ main f """ 
     root = Tk()
