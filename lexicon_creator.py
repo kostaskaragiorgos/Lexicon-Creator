@@ -41,7 +41,7 @@ class LexiconCreator():
         self.file_menu = Menu(self.menu, tearoff=0)
         self.file_menu.add_command(label="Create Lexicon",accelerator ='Ctrl+N', command=self.create_l)
         self.file_menu.add_command(label="Load Lexicon",accelerator ='Ctrl+L', command=self.load_l)
-        self.file_menu.add_command(label="Close File", command=self.cfile, state="disabled")
+        self.file_menu.add_command(label="Close File", accelerator ='Ctrl+F4', command=self.cfile, state="disabled")
         self.file_menu.add_command(label="Exit", accelerator='Alt+F4', command=self.exitmenu)
         self.menu.add_cascade(label="File", menu=self.file_menu)
         self.edimenu = Menu(self.menu, tearoff=0)
@@ -63,8 +63,9 @@ class LexiconCreator():
         self.master.bind('<Control-F1>', lambda event: self.helpmenu())
         self.master.bind('<Control-i>', lambda event: self.aboutmenu())
         self.master.bind('<Control-t>', lambda event: self.showlexicon())
-        self.master.bind('<Control-n>',lambda event: self.create_l())
-        self.master.bind('<Control-l>',lambda event: self.load_l())
+        self.master.bind('<Control-n>', lambda event: self.create_l())
+        self.master.bind('<Control-l>', lambda event: self.load_l())
+        self.master.bind('<Control-F4>', lambda event: self.cfile())
     def deleteword(self):
         pass
     def cleardf(self):
@@ -81,18 +82,21 @@ class LexiconCreator():
             df = pd.read_csv(str(self.createlex)+str('.csv'))
             msg.showinfo("Lexicon Words",str(df))
     def cfile(self):
-        """ closes the file """
-        self.createlex = ""
-        self.loadlex = ""
-        self.wordT.config(state="disable")
-        self.defT.config(state="disable")
-        self.addb.config(state="disable")
-        self.clearwb.config(state="disable")
-        self.cleardb.config(state="disable")
-        self.file_menu.entryconfig("Create Lexicon", state="normal")
-        self.file_menu.entryconfig("Load Lexicon", state="normal")
-        self.file_menu.entryconfig("Close File", state="disable")
-        msg.showinfo("SUCCESS", "FILE CLOASED")
+        if self.createlex == "":
+            msg.showerror("Error", "No lexicon to close")
+        else:
+            """ closes the file """
+            self.createlex = ""
+            self.loadlex = ""
+            self.wordT.config(state="disable")
+            self.defT.config(state="disable")
+            self.addb.config(state="disable")
+            self.clearwb.config(state="disable")
+            self.cleardb.config(state="disable")
+            self.file_menu.entryconfig("Create Lexicon", state="normal")
+            self.file_menu.entryconfig("Load Lexicon", state="normal")
+            self.file_menu.entryconfig("Close File", state="disable")
+            msg.showinfo("SUCCESS", "FILE CLOASED")
     def addw(self):
         if self.wordT.count(1.0, END) == (1, ) or  self.defT.count(1.0, END) == (1, ):
             msg.showerror("Value Error Description Error", "Enter a word \n Enter a Definition")
