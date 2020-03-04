@@ -39,8 +39,8 @@ class LexiconCreator():
         #menu
         self.menu = Menu(self.master)
         self.file_menu = Menu(self.menu, tearoff=0)
-        self.file_menu.add_command(label="Create Lexicon", command=self.create_l)
-        self.file_menu.add_command(label="Load Lexicon", command=self.load_l)
+        self.file_menu.add_command(label="Create Lexicon",accelerator ='Ctrl+N', command=self.create_l)
+        self.file_menu.add_command(label="Load Lexicon",accelerator ='Ctrl+L', command=self.load_l)
         self.file_menu.add_command(label="Close File", command=self.cfile, state="disabled")
         self.file_menu.add_command(label="Exit", accelerator='Alt+F4', command=self.exitmenu)
         self.menu.add_cascade(label="File", menu=self.file_menu)
@@ -63,6 +63,8 @@ class LexiconCreator():
         self.master.bind('<Control-F1>', lambda event: self.helpmenu())
         self.master.bind('<Control-i>', lambda event: self.aboutmenu())
         self.master.bind('<Control-t>', lambda event: self.showlexicon())
+        #self.master.bind('<Control-n>',lambda event: self.create_l()) todo check the function create_l
+        #self.master.bind('<Control-l>',lambda event: self.load_l()) todo check the function load_l
     def deleteword(self):
         pass
     def cleardf(self):
@@ -97,7 +99,6 @@ class LexiconCreator():
             self.wordT.delete(1.0, END)
             self.defT.delete(1.0, END)
         else:
-
             with open(str(self.createlex)+str('.csv'), 'a+') as f:
                 thewriter = csv.writer(f)
                 thewriter.writerow([str(self.wordT.get(1.0, END)), self.defT.get(1.0, END)])
