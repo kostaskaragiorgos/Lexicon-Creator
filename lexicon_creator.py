@@ -63,7 +63,7 @@ class LexiconCreator():
         self.master.bind('<Control-F1>', lambda event: self.helpmenu())
         self.master.bind('<Control-i>', lambda event: self.aboutmenu())
         self.master.bind('<Control-t>', lambda event: self.showlexicon())
-        #self.master.bind('<Control-n>',lambda event: self.create_l()) todo check the function create_l
+        self.master.bind('<Control-n>',lambda event: self.create_l())
         #self.master.bind('<Control-l>',lambda event: self.load_l()) todo check the function load_l
     def deleteword(self):
         pass
@@ -108,24 +108,27 @@ class LexiconCreator():
 
     def create_l(self):
         """ creates a lexicon(.csv file)"""
-        self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent=self.master)
-        while self.createlex is None or (not self.createlex.strip()): 
-            self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent=self.master)
-        if not os.path.exists(self.createlex+str(".csv")):
-            with open(str(self.createlex)+str(".csv"), 'a+') as d:
-                thewriter = csv.writer(d)
-                thewriter.writerow(['Word', 'Definition'])
-            self.wordT.config(state="normal")
-            self.defT.config(state="normal")
-            self.addb.config(state="normal")
-            self.clearwb.config(state="normal")
-            self.cleardb.config(state="normal")
-            msg.showinfo("SUCCESS", "THE FILE CREATED SUCCESSFULLY")
-            self.file_menu.entryconfig("Create Lexicon", state="disabled")
-            self.file_menu.entryconfig("Load Lexicon", state="disabled")
-            self.file_menu.entryconfig("Close File", state="normal")
+        if  self.createlex != "" or self.loadlex != "":
+            msg.showerror("Error", "Lexicon already created or loaded")
         else:
-            msg.showerror("ERROR", "THIS FILE ALREADY EXISTS")
+            self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent=self.master)
+            while self.createlex is None or (not self.createlex.strip()): 
+                self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent=self.master)
+            if not os.path.exists(self.createlex+str(".csv")):
+                with open(str(self.createlex)+str(".csv"), 'a+') as d:
+                    thewriter = csv.writer(d)
+                    thewriter.writerow(['Word', 'Definition'])
+                self.wordT.config(state="normal")
+                self.defT.config(state="normal")
+                self.addb.config(state="normal")
+                self.clearwb.config(state="normal")
+                self.cleardb.config(state="normal")
+                msg.showinfo("SUCCESS", "THE FILE CREATED SUCCESSFULLY")
+                self.file_menu.entryconfig("Create Lexicon", state="disabled")
+                self.file_menu.entryconfig("Load Lexicon", state="disabled")
+                self.file_menu.entryconfig("Close File", state="normal")
+            else:
+                msg.showerror("ERROR", "THIS FILE ALREADY EXISTS")
     def load_l(self):
         """loads a lexicon(.csv file)"""
         f = 0
