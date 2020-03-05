@@ -7,6 +7,12 @@ from tkinter import simpledialog
 import os 
 import csv
 import pandas as pd
+def helpmenu():
+    """ help menu """
+    msg.showinfo("Help", "Create or load a lexicon from the file menu. Add the word and its definition to the lexicon")
+def aboutmenu():
+    """ about menu """
+    msg.showinfo("About", "Version 1.0")
 class LexiconCreator():
     """
     Lexicon Creator Class
@@ -53,17 +59,17 @@ class LexiconCreator():
         self.showmenu.add_command(label="Show Lexicon", accelerator='Ctrl+T', command=self.showlexicon)
         self.menu.add_cascade(label="Show", menu=self.showmenu)
         self.about_menu = Menu(self.menu, tearoff=0)
-        self.about_menu.add_command(label="About", accelerator='Ctrl+I', command=self.aboutmenu)
+        self.about_menu.add_command(label="About", accelerator='Ctrl+I', command=aboutmenu)
         self.menu.add_cascade(label="About", menu=self.about_menu)
         self.help_menu = Menu(self.menu, tearoff=0)
-        self.help_menu.add_command(label="Help", accelerator='Ctrl+F1', command=self.helpmenu)
+        self.help_menu.add_command(label="Help", accelerator='Ctrl+F1', command=helpmenu)
         self.menu.add_cascade(label="Help", menu=self.help_menu)
         self.master.config(menu=self.menu)
         self.master.bind('<Alt-d>', lambda event: self.cleardf())
         self.master.bind('<Alt-z>', lambda event: self.clearwf())
         self.master.bind('<Alt-F4>', lambda event: self.exitmenu())
-        self.master.bind('<Control-F1>', lambda event: self.helpmenu())
-        self.master.bind('<Control-i>', lambda event: self.aboutmenu())
+        self.master.bind('<Control-F1>', lambda event: helpmenu())
+        self.master.bind('<Control-i>', lambda event: aboutmenu())
         self.master.bind('<Control-t>', lambda event: self.showlexicon())
         self.master.bind('<Control-n>', lambda event: self.create_l())
         self.master.bind('<Control-l>', lambda event: self.load_l())
@@ -82,6 +88,7 @@ class LexiconCreator():
             msg.showerror("Error", "No Lexicon")
         else:
             df = pd.read_csv(str(self.createlex)+str('.csv'))
+            df = df.drop_duplicates(keep="first")
             msg.showinfo("Lexicon Words",str(df))
     def cfile(self):
         if self.createlex == "":
@@ -164,12 +171,6 @@ class LexiconCreator():
         """ exit menu """
         if msg.askokcancel("Quit?", "Really quit?"):
             self.master.destroy()
-    def helpmenu(self):
-        """ help menu """
-        msg.showinfo("Help", "Create or load a lexicon from the file menu. Add the word and its definition to the lexicon")
-    def aboutmenu(self):
-        """ about menu """ 
-        msg.showinfo("About", "Version 1.0")
 def main():
     """ main f """ 
     root = Tk()
