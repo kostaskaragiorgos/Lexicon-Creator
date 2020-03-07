@@ -53,7 +53,7 @@ class LexiconCreator():
         self.edimenu = Menu(self.menu, tearoff=0)
         self.edimenu.add_command(label="Clear Word", accelerator='Alt+Z', command=self.clearwf)
         self.edimenu.add_command(label="Clear Definition", accelerator='Alt+D', command=self.cleardf)
-        self.edimenu.add_command(label="Delete Word", command=self.deleteword)
+        self.edimenu.add_command(label="Delete Word", accelerator='Ctrl+D', command=self.deleteword)
         self.menu.add_cascade(label="Edit", menu=self.edimenu)
         self.showmenu = Menu(self.menu, tearoff=0)
         self.showmenu.add_command(label="Show Lexicon", accelerator='Ctrl+T', command=self.showlexicon)
@@ -74,6 +74,7 @@ class LexiconCreator():
         self.master.bind('<Control-n>', lambda event: self.create_l())
         self.master.bind('<Control-l>', lambda event: self.load_l())
         self.master.bind('<Control-F4>', lambda event: self.cfile())
+        self.master.bind('<Control-d>',lambda event: self.deleteword())
     def deleteword(self):
         """ deletes a word from the loaded or created lexicon"""
         if self.createlex == "":
@@ -82,7 +83,7 @@ class LexiconCreator():
             self.word_delete = simpledialog.askstring("Word To Delete", "Enter the word to delete (Case sensitive)", parent=self.master)
             df = pd.read_csv(str(self.createlex)+str('.csv'))
             df = df[df.Word == self.word_delete]
-            msg.showinfo("SUCCESS","The word successfully deleted")
+            msg.showinfo("SUCCESS", "The word successfully deleted")
     def cleardf(self):
         """ clears the definition  text field"""
         self.defT.delete(1.0, END)
