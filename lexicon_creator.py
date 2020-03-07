@@ -156,7 +156,6 @@ class LexiconCreator():
         if  self.createlex != "":
             msg.showerror("Error", "Lexicon already created or loaded")
         else:
-
             self.loadlex = simpledialog.askstring("LOAD LEXICON", "Enter the name  of the lexicon you want to load (Case sensitive)")
             while self.loadlex is None: 
                 self.loadlex = simpledialog.askstring("LOAD LEXICON", "Enter the name of the lexicon you want to load (Case sensitive)", parent=self.master)
