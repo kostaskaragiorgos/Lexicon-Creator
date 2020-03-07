@@ -27,6 +27,9 @@ Create your own lexicon and save it to a .csv file
 **Radon**
 
 <p><img src = "lexicon_creator cc radon.png" title = "Lexicon Radon"/> </p>
+<p><img src = "lexicon_creator mi radon.png" title = "Lexicon Radon mi"/> </p>
+<p><img src = "lexicon_creator raw radon.png" title = "Lexicon Radon raw"/> </p>
+<p><img src = "lexicon_creator hal radon.png" title = "Lexicon Radon hal"/> </p>
 
 ## Keybinds
 
