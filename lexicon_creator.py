@@ -103,7 +103,6 @@ class LexiconCreator():
         if self.createlex == "":
             msg.showerror("Error", "No lexicon to close")
         else:
-            """ closes the file """
             self.createlex = ""
             self.loadlex = ""
             self.wordT.config(state="disable")
@@ -157,14 +156,11 @@ class LexiconCreator():
         if  self.createlex != "":
             msg.showerror("Error", "Lexicon already created or loaded")
         else:
-            f = 0
+
             self.loadlex = simpledialog.askstring("LOAD LEXICON", "Enter the name  of the lexicon you want to load (Case sensitive)")
             while self.loadlex is None: 
                 self.loadlex = simpledialog.askstring("LOAD LEXICON", "Enter the name of the lexicon you want to load (Case sensitive)", parent=self.master)
-            for i in os.listdir():
-                if str(self.loadlex+".csv") == i:
-                    f += 1
-            if f > 0:
+            if str(self.loadlex+".csv") in os.listdir():
                 self.wordT.config(state="normal")
                 self.defT.config(state="normal")
                 self.addb.config(state="normal")
