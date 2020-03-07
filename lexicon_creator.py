@@ -75,6 +75,7 @@ class LexiconCreator():
         self.master.bind('<Control-l>', lambda event: self.load_l())
         self.master.bind('<Control-F4>', lambda event: self.cfile())
     def deleteword(self):
+        """ deletes a word from the loaded or created lexicon"""
         if self.createlex == "":
             msg.showerror("Error", "No Lexicon")
         else:
