@@ -37,6 +37,7 @@ Create your own lexicon and save it to a .csv file
     <li> Exit(Alt + F4) </li>
     <li> Clear Word (Alt + Z) </li>
     <li> Clear Definition (Alt + D) </li>
+    <li> Delete Word (Ctrl + D) </li>
     <li> Show Lexicon (Ctrl + T) </li>
     <li> About(Ctrl + I) </li>
     <li> Help(Ctrl + F1) </li>

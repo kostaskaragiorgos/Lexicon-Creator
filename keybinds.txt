@@ -9,6 +9,7 @@ Edit menu
 =========================
 Clear Word Alt + Z
 Clear Definition Alt + D
+Delete Word Ctrl + D
 ========================
 Show menu
 =====================
