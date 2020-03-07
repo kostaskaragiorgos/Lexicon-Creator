@@ -75,7 +75,13 @@ class LexiconCreator():
         self.master.bind('<Control-l>', lambda event: self.load_l())
         self.master.bind('<Control-F4>', lambda event: self.cfile())
     def deleteword(self):
-        pass
+        if self.createlex == "":
+            msg.showerror("Error", "No Lexicon")
+        else:
+            self.word_delete = simpledialog.askstring("Word To Delete", "Enter the word to delete (Case sensitive)", parent=self.master)
+            df = pd.read_csv(str(self.createlex)+str('.csv'))
+            df = df[df.Word == self.word_delete]
+            msg.showinfo("SUCCESS","The word successfully deleted")
     def cleardf(self):
         """ clears the definition  text field"""
         self.defT.delete(1.0, END)
@@ -118,10 +124,9 @@ class LexiconCreator():
             msg.showinfo("Word info", "Word: "+str(self.wordT.get(1.0, END))+"Definition: "+self.defT.get(1.0, END))
             self.wordT.delete(1.0, END)
             self.defT.delete(1.0, END)
-
     def create_l(self):
         """ creates a lexicon(.csv file)"""
-        if  self.createlex != "" or self.loadlex != "":
+        if  self.createlex != "":
             msg.showerror("Error", "Lexicon already created or loaded")
         else:
             self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent=self.master)
@@ -142,6 +147,7 @@ class LexiconCreator():
                 self.file_menu.entryconfig("Close File", state="normal")
             else:
                 msg.showerror("ERROR", "THIS FILE ALREADY EXISTS")
+                self.createlex = ""
     def load_l(self):
         """loads a lexicon(.csv file)"""
         if  self.createlex != "":
@@ -176,6 +182,5 @@ def main():
     root = Tk()
     LexiconCreator(root)
     root.mainloop()
-    
 if __name__ == '__main__':
     main()
