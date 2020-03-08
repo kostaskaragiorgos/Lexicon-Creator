@@ -36,6 +36,7 @@ Create your own lexicon and save it to a .csv file
 <ul>
     <li> Create Lexicon(Ctrl + N) </li>
     <li> Load Lexicon(Ctrl + L) </li>
+    <li> Add Word(Ctrl + O) </li>
     <li> Close File(Ctrl + F4) </li>
     <li> Exit(Alt + F4) </li>
     <li> Clear Word (Alt + Z) </li>
