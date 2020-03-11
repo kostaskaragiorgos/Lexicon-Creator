@@ -1,10 +1,21 @@
 # Lexicon-Creator
-
+Create your own lexicon and save it to a .csv file
 
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/) [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
 
 
-Create your own lexicon and save it to a .csv file
+# Table of contents
+
+<!--ts-->
+  * [Workout-tracker](#Workout-tracker)
+  * [Table of contents](#Table_of_contents)
+  * [Dependencies](#Dependencies)
+  * [Files](#FILES)
+  * [CurrentVersion](#Current_Version)
+  * [Radon](#Radon)
+  * [Keybinds](#Keybinds)
+  * [License](#License)
+<!--te-->
 
 ## Dependencies
 
@@ -24,11 +35,11 @@ Create your own lexicon and save it to a .csv file
 <li> lexicon_creator.txt(radon cc file) </li>
 </ul> 
 
-**Current Version**
+## Current_Version
 
 <p><img src ="lexicon creator version.png" title = "Lexicon Creator Version"/> </p>
 
-**Radon**
+## Radon
 
 <p><img src = "lexicon_creator cc radon.png" title = "Lexicon Radon"/> </p>
 <p><img src = "lexicon_creator mi radon.png" title = "Lexicon Radon mi"/> </p>
