@@ -83,11 +83,8 @@ class LexiconCreator():
             msg.showerror("Error", "No Lexicon")
         elif pd.read_csv(str(self.createlex)+str('.csv')).empty:
             msg.showerror('Error',"Empty Lexicon")
-        else:
-            self.word_delete = simpledialog.askstring("Word To Delete", "Enter the word to delete (Case sensitive)", parent=self.master)
-            df = pd.read_csv(str(self.createlex)+str('.csv'))
-            df = df[df.Word == self.word_delete]
-            msg.showinfo("SUCCESS", "The word successfully deleted")
+        #else:
+            #self.word_delete = simpledialog.askstring("Word To Delete", "Enter the word to delete (Case sensitive)", parent=self.master) TODO
     def cleardf(self):
         """ clears the definition  text field"""
         self.defT.delete(1.0, END)
