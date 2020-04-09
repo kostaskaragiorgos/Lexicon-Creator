@@ -81,6 +81,8 @@ class LexiconCreator():
         """ deletes a word from the loaded or created lexicon"""
         if self.createlex == "":
             msg.showerror("Error", "No Lexicon")
+        elif pd.read_csv(str(self.createlex)+str('.csv')).empty:
+            msg.showerror('Error',"Empty Lexicon")
         else:
             self.word_delete = simpledialog.askstring("Word To Delete", "Enter the word to delete (Case sensitive)", parent=self.master)
             df = pd.read_csv(str(self.createlex)+str('.csv'))
