@@ -17,11 +17,19 @@ You press ok to close the app or cancel if you don't want
 
 # Edit menu
 
+## Clear Word
+
+You can clear words text field using menu Edit --> Clear Word or using Alt+z keybind
+
+<p><img src ="doc images/Edit menu/clear word.png" title="Clear Word"/></p>
+
+
+
 # Show menu
 
 ## Show Lexicon
 
-You can show the created or loaded lexicon using menu Show --> Show Lexicon or using Ctrl+T
+You can show the created or loaded lexicon using menu Show --> Show Lexicon or using Ctrl+T keybind
 
 <p><img src ="doc images/Show menu/show menu.png" title="Show Lexicon menu"/> </p>
 
