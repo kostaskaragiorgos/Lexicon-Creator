@@ -19,11 +19,21 @@ You press ok to close the app or cancel if you don't want
 
 ## Clear Word
 
-You can clear words text field using menu Edit --> Clear Word or using Alt+z keybind
+You can clear word text field using menu Edit --> Clear Word or using Alt+z keybind
 
 <p><img src ="doc images/Edit menu/clear word.png" title="Clear Word"/></p>
 
+## Clear Definition
 
+You can clear definition text field using menu Edit --> Clear Definition or using Alt+d keybind
+
+<p><img src ="doc images/Edit menu/clear definition.png" title="Clear Definition"/></p>
+
+## Delete Word
+
+You can delete word from a lexicon using menu Edit --> Delete Word or using Ctrl+d keybind
+
+<p><img src ="doc images/Edit menu/delete word.png" title="Delete Word"/></p>
 
 # Show menu
 
