@@ -10,7 +10,7 @@ Create your own lexicon and save it to a .csv file
   * [Workout-tracker](#Workout-tracker)
   * [Table of contents](#Table_of_contents)
   * [Dependencies](#Dependencies)
-  * [Files](#FILES)
+  * [Files/Folders](#Files/Folders)
   * [CurrentVersion](#Current_Version)
   * [Radon](#Radon)
   * [Keybinds](#Keybinds)
@@ -26,7 +26,7 @@ Create your own lexicon and save it to a .csv file
   <li> second way to install pandas (pip install pandas) </li>
 </ul>
 
-## FILES/FOLDERS
+## Files/Folders
 <ul>
   <li> images (images folder) </li>
   <li> lexicon_creator.py(the main file) </li>
