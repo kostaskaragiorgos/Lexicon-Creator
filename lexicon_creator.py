@@ -96,6 +96,8 @@ class LexiconCreator():
         """ shows the whole lexicon """
         if self.createlex == "":
             msg.showerror("Error", "No Lexicon")
+        elif pd.read_csv(str(self.createlex)+str('.csv')).empty:
+            msg.showerror('Error',"Empty Lexicon")
         else:
             df = pd.read_csv(str(self.createlex)+str('.csv'))
             df = df.drop_duplicates(keep="first")
