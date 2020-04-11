@@ -12,6 +12,7 @@ Create your own lexicon and save it to a .csv file
   * [Dependencies](#Dependencies)
   * [Files/Folders](#Files/Folders)
   * [CurrentVersion](#Current_Version)
+  * [Documentation](#Documentation)
   * [Radon](#Radon)
   * [Keybinds](#Keybinds)
   * [License](#License)
@@ -37,6 +38,11 @@ Create your own lexicon and save it to a .csv file
 ## Current_Version
 
 <p><img src ="images/lexicon creator version.png" title = "Lexicon Creator Version"/> </p>
+
+
+## Documentation
+
+All project documentation is located in the `./doc`  folder.
 
 ## Radon
 
