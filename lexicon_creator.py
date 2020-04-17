@@ -66,7 +66,7 @@ class LexiconCreator():
         self.help_menu.add_command(label="Help", accelerator='Ctrl+F1', command=helpmenu)
         self.menu.add_cascade(label="Help", menu=self.help_menu)
         self.master.config(menu=self.menu)
-        self.master.bind('<Control-o>',lambda event: self.addw())
+        self.master.bind('<Control-o>', lambda event: self.addw())
         self.master.bind('<Alt-d>', lambda event: self.cleardf())
         self.master.bind('<Alt-z>', lambda event: self.clearwf())
         self.master.bind('<Alt-F4>', lambda event: self.exitmenu())
@@ -82,7 +82,7 @@ class LexiconCreator():
         if self.createlex == "":
             msg.showerror("Error", "No Lexicon")
         elif pd.read_csv(str(self.createlex)+str('.csv')).empty:
-            msg.showerror('Error',"Empty Lexicon")
+            msg.showerror('Error', "Empty Lexicon")
         #else:
             #self.word_delete = simpledialog.askstring("Word To Delete", "Enter the word to delete (Case sensitive)", parent=self.master) TODO
     def cleardf(self):
