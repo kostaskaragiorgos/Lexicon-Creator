@@ -99,8 +99,8 @@ class LexiconCreator():
             msg.showerror('Error',"Empty Lexicon")
         else:
             df = pd.read_csv(str(self.createlex)+str('.csv'))
-            df = df.drop_duplicates(keep="first")
-            df = df.replace(r'\r\n', ' ', regex=True)
+            df.drop_duplicates(keep="first", inplace=True)
+            df.replace(r'\r\n', ' ', regex=True, inplace=True)
             msg.showinfo("Lexicon Words", str(df))
     def cfile(self):
         """ closes the lexicon """
