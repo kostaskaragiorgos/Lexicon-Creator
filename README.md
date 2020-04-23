@@ -7,13 +7,17 @@ Create your own lexicon and save it to a .csv file
 # Table of contents
 
 <!--ts-->
-  * [Workout-tracker](#Workout-tracker)
+  * [Lexicon-Creator](#Lexicon-Creator)
   * [Table of contents](#Table_of_contents)
   * [Dependencies](#Dependencies)
   * [Files/Folders](#Files/Folders)
   * [CurrentVersion](#Current_Version)
   * [Documentation](#Documentation)
   * [Radon](#Radon)
+    * [Radon cc](#Radon_cc)
+    * [Radon hal](#Radon_hal)
+    * [Radon mi](#Radon_mi)
+    * [Radon raw](#Radon_raw)
   * [Keybinds](#Keybinds)
   * [License](#License)
 <!--te-->
@@ -30,6 +34,7 @@ Create your own lexicon and save it to a .csv file
 ## Files/Folders
 <ul>
   <li> images (images folder) </li>
+  <li> doc (documentation folder) </li>
   <li> lexicon_creator.py(the main file) </li>
   <li> keybinds.txt(keybinds file) </li>
   <li> lexicon_creator.txt(radon cc file) </li>
@@ -46,10 +51,22 @@ All project documentation is located in the `./doc`  folder.
 
 ## Radon
 
+### Radon_cc
+
 <p><img src = "images/lexicon_creator cc radon.png" title = "Lexicon Radon"/> </p>
-<p><img src = "images/lexicon_creator mi radon.png" title = "Lexicon Radon mi"/> </p>
-<p><img src = "images/lexicon_creator raw radon.png" title = "Lexicon Radon raw"/> </p>
+
+### Radon_hal
+
 <p><img src = "images/lexicon_creator hal radon.png" title = "Lexicon Radon hal"/> </p>
+
+### Radon_mi
+
+<p><img src = "images/lexicon_creator mi radon.png" title = "Lexicon Radon mi"/> </p>
+
+### Radon_raw
+
+<p><img src = "images/lexicon_creator raw radon.png" title = "Lexicon Radon raw"/> </p>
+
 
 ## Keybinds
 
