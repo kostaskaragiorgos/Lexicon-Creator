@@ -32,6 +32,7 @@ Create your own lexicon and save it to a .csv file
 </ul>
 
 ## Files/Folders
+
 <ul>
   <li> images (images folder) </li>
   <li> doc (documentation folder) </li>
@@ -86,4 +87,5 @@ All project documentation is located in the `./doc`  folder.
 
 
 ## License
+
 [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
