@@ -52,6 +52,7 @@ class LexiconCreator():
         self.file_menu.add_command(label="Exit", accelerator='Alt+F4', command=self.exitmenu)
         self.menu.add_cascade(label="File", menu=self.file_menu)
         self.edimenu = Menu(self.menu, tearoff=0)
+        self.edimenu.add_command(label="Reset", accelerator='Ctrl+Z', command=self.reset)
         self.edimenu.add_command(label="Clear Word", accelerator='Alt+Z', command=self.clearwf)
         self.edimenu.add_command(label="Clear Definition", accelerator='Alt+D', command=self.cleardf)
         self.edimenu.add_command(label="Delete Word", accelerator='Ctrl+D', command=self.deleteword)
@@ -66,6 +67,7 @@ class LexiconCreator():
         self.help_menu.add_command(label="Help", accelerator='Ctrl+F1', command=helpmenu)
         self.menu.add_cascade(label="Help", menu=self.help_menu)
         self.master.config(menu=self.menu)
+        self.master.bind('<Control-z>', lambda event: self.reset())
         self.master.bind('<Control-o>', lambda event: self.addw())
         self.master.bind('<Alt-d>', lambda event: self.cleardf())
         self.master.bind('<Alt-z>', lambda event: self.clearwf())
@@ -85,6 +87,10 @@ class LexiconCreator():
             msg.showerror('Error', "Empty Lexicon")
         #else:
             #self.word_delete = simpledialog.askstring("Word To Delete", "Enter the word to delete (Case sensitive)", parent=self.master) TODO
+    def reset(self):
+        """ clears both word and definition field """
+        self.wordT.delete(1.0, END)
+        self.defT.delete(1.0, END)
     def cleardf(self):
         """ clears the definition  text field"""
         self.defT.delete(1.0, END)
