@@ -137,23 +137,27 @@ class LexiconCreator():
             msg.showinfo("Word info", "Word: "+str(self.wordT.get(1.0, END))+"Definition: "+self.defT.get(1.0, END))
             self.wordT.delete(1.0, END)
             self.defT.delete(1.0, END)
+    def createlexiconuserinput(self):
+        self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent=self.master)
+        while self.createlex is None or (not self.createlex.strip()): 
+            self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent=self.master)
+    def setbuttonstonormal(self):
+        self.wordT.config(state="normal")
+        self.defT.config(state="normal")
+        self.addb.config(state="normal")
+        self.clearwb.config(state="normal")
+        self.cleardb.config(state="normal")
     def create_l(self):
         """ creates a lexicon(.csv file)"""
         if  self.createlex != "":
             msg.showerror("Error", "Lexicon already created or loaded")
         else:
-            self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent=self.master)
-            while self.createlex is None or (not self.createlex.strip()): 
-                self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent=self.master)
+            self.createlexiconuserinput()
             if not os.path.exists(self.createlex+str(".csv")):
                 with open(str(self.createlex)+str(".csv"), 'a+') as d:
                     thewriter = csv.writer(d)
                     thewriter.writerow(['Word', 'Definition'])
-                self.wordT.config(state="normal")
-                self.defT.config(state="normal")
-                self.addb.config(state="normal")
-                self.clearwb.config(state="normal")
-                self.cleardb.config(state="normal")
+                self.setbuttonstonormal()
                 msg.showinfo("SUCCESS", "THE FILE CREATED SUCCESSFULLY")
                 self.file_menu.entryconfig("Create Lexicon", state="disabled")
                 self.file_menu.entryconfig("Load Lexicon", state="disabled")
