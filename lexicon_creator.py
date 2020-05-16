@@ -138,6 +138,7 @@ class LexiconCreator():
             self.wordT.delete(1.0, END)
             self.defT.delete(1.0, END)
     def button_menu_state_change(self):
+        """ change buttons and menus after lexicon creation or after load"""
         self.wordT.config(state="normal")
         self.defT.config(state="normal")
         self.addb.config(state="normal")
@@ -151,7 +152,6 @@ class LexiconCreator():
         self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent=self.master)
         while self.createlex is None or (not self.createlex.strip()): 
             self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent=self.master)
-
     def create_l(self):
         """ creates a lexicon(.csv file)"""
         if  self.createlex != "":
@@ -168,6 +168,7 @@ class LexiconCreator():
                 msg.showerror("ERROR", "THIS FILE ALREADY EXISTS")
                 self.createlex = ""
     def load_l_user_input(self):
+        """ load menu user input """
         self.loadlex = simpledialog.askstring("LOAD LEXICON", "Enter the name  of the lexicon you want to load (Case sensitive)")
         while self.loadlex is None: 
             self.loadlex = simpledialog.askstring("LOAD LEXICON", "Enter the name of the lexicon you want to load (Case sensitive)", parent=self.master)
