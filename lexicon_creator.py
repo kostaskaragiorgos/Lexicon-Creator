@@ -102,7 +102,7 @@ class LexiconCreator():
         if self.createlex == "":
             msg.showerror("Error", "No Lexicon")
         elif pd.read_csv(str(self.createlex)+str('.csv')).empty:
-            msg.showerror('Error',"Empty Lexicon")
+            msg.showerror('Error', "Empty Lexicon")
         else:
             df = pd.read_csv(str(self.createlex)+str('.csv'))
             df.drop_duplicates(keep="first", inplace=True)
@@ -137,16 +137,21 @@ class LexiconCreator():
             msg.showinfo("Word info", "Word: "+str(self.wordT.get(1.0, END))+"Definition: "+self.defT.get(1.0, END))
             self.wordT.delete(1.0, END)
             self.defT.delete(1.0, END)
-    def createlexiconuserinput(self):
-        self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent=self.master)
-        while self.createlex is None or (not self.createlex.strip()): 
-            self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent=self.master)
-    def setbuttonstonormal(self):
+    def button_menu_state_change(self):
         self.wordT.config(state="normal")
         self.defT.config(state="normal")
         self.addb.config(state="normal")
         self.clearwb.config(state="normal")
         self.cleardb.config(state="normal")
+        self.file_menu.entryconfig("Close File", state="normal")
+        self.file_menu.entryconfig("Create Lexicon", state="disabled")
+        self.file_menu.entryconfig("Load Lexicon", state="disabled")
+    def createlexiconuserinput(self):
+        """ create lexicon menu user input"""
+        self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent=self.master)
+        while self.createlex is None or (not self.createlex.strip()): 
+            self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent=self.master)
+
     def create_l(self):
         """ creates a lexicon(.csv file)"""
         if  self.createlex != "":
@@ -157,27 +162,15 @@ class LexiconCreator():
                 with open(str(self.createlex)+str(".csv"), 'a+') as d:
                     thewriter = csv.writer(d)
                     thewriter.writerow(['Word', 'Definition'])
-                self.setbuttonstonormal()
                 msg.showinfo("SUCCESS", "THE FILE CREATED SUCCESSFULLY")
-                self.file_menu.entryconfig("Create Lexicon", state="disabled")
-                self.file_menu.entryconfig("Load Lexicon", state="disabled")
-                self.file_menu.entryconfig("Close File", state="normal")
+                self.button_menu_state_change()
             else:
                 msg.showerror("ERROR", "THIS FILE ALREADY EXISTS")
                 self.createlex = ""
     def load_l_user_input(self):
         self.loadlex = simpledialog.askstring("LOAD LEXICON", "Enter the name  of the lexicon you want to load (Case sensitive)")
-            while self.loadlex is None: 
-                self.loadlex = simpledialog.askstring("LOAD LEXICON", "Enter the name of the lexicon you want to load (Case sensitive)", parent=self.master)
-    def button_menu_state_change(self):
-        self.wordT.config(state="normal")
-        self.defT.config(state="normal")
-        self.addb.config(state="normal")
-        self.clearwb.config(state="normal")
-        self.cleardb.config(state="normal")
-        self.file_menu.entryconfig("Close File", state="normal")
-        self.file_menu.entryconfig("Create Lexicon", state="disabled")
-        self.file_menu.entryconfig("Load Lexicon", state="disabled")
+        while self.loadlex is None: 
+            self.loadlex = simpledialog.askstring("LOAD LEXICON", "Enter the name of the lexicon you want to load (Case sensitive)", parent=self.master)
     def load_l(self):
         """loads a lexicon(.csv file)"""
         if  self.createlex != "":
@@ -201,3 +194,4 @@ def main():
     root.mainloop()
 if __name__ == '__main__':
     main()
+    
