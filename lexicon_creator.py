@@ -165,25 +165,29 @@ class LexiconCreator():
             else:
                 msg.showerror("ERROR", "THIS FILE ALREADY EXISTS")
                 self.createlex = ""
+    def load_l_user_input(self):
+        self.loadlex = simpledialog.askstring("LOAD LEXICON", "Enter the name  of the lexicon you want to load (Case sensitive)")
+            while self.loadlex is None: 
+                self.loadlex = simpledialog.askstring("LOAD LEXICON", "Enter the name of the lexicon you want to load (Case sensitive)", parent=self.master)
+    def button_menu_state_change(self):
+        self.wordT.config(state="normal")
+        self.defT.config(state="normal")
+        self.addb.config(state="normal")
+        self.clearwb.config(state="normal")
+        self.cleardb.config(state="normal")
+        self.file_menu.entryconfig("Close File", state="normal")
+        self.file_menu.entryconfig("Create Lexicon", state="disabled")
+        self.file_menu.entryconfig("Load Lexicon", state="disabled")
     def load_l(self):
         """loads a lexicon(.csv file)"""
         if  self.createlex != "":
             msg.showerror("Error", "Lexicon already created or loaded")
         else:
-            self.loadlex = simpledialog.askstring("LOAD LEXICON", "Enter the name  of the lexicon you want to load (Case sensitive)")
-            while self.loadlex is None: 
-                self.loadlex = simpledialog.askstring("LOAD LEXICON", "Enter the name of the lexicon you want to load (Case sensitive)", parent=self.master)
+            self.load_l_user_input()
             if str(self.loadlex+".csv") in os.listdir():
-                self.wordT.config(state="normal")
-                self.defT.config(state="normal")
-                self.addb.config(state="normal")
-                self.clearwb.config(state="normal")
-                self.cleardb.config(state="normal")
                 self.createlex = self.loadlex 
                 msg.showinfo("SUCCESS", "THE FILE LOADED SUCCESSFULLY")
-                self.file_menu.entryconfig("Close File", state="normal")
-                self.file_menu.entryconfig("Create Lexicon", state="disabled")
-                self.file_menu.entryconfig("Load Lexicon", state="disabled")
+                self.button_menu_state_change()
             else:
                 msg.showerror("ERROR", "THERE IS NO FILE NAMED "+ str(self.loadlex+".csv"))
     def exitmenu(self):
