@@ -124,19 +124,20 @@ class LexiconCreator():
             self.file_menu.entryconfig("Load Lexicon", state="normal")
             self.file_menu.entryconfig("Close File", state="disable")
             msg.showinfo("SUCCESS", "FILE CLOASED")
+    def add_word_to_lexicon_file(self):
+        with open(str(self.createlex)+str('.csv'), 'a+') as f:
+            thewriter = csv.writer(f)
+            thewriter.writerow([str(self.wordT.get(1.0, END)), self.defT.get(1.0, END)])
     def addw(self):
         """ adds word to the lexicon"""
         if self.wordT.count(1.0, END) == (1, ) or  self.defT.count(1.0, END) == (1, ):
             msg.showerror("Value Error Description Error", "Enter a word \n Enter a Definition")
-            self.wordT.delete(1.0, END)
-            self.defT.delete(1.0, END)
+            self.reset()
         else:
-            with open(str(self.createlex)+str('.csv'), 'a+') as f:
-                thewriter = csv.writer(f)
-                thewriter.writerow([str(self.wordT.get(1.0, END)), self.defT.get(1.0, END)])
+            self.add_word_to_lexicon_file()
             msg.showinfo("Word info", "Word: "+str(self.wordT.get(1.0, END))+"Definition: "+self.defT.get(1.0, END))
-            self.wordT.delete(1.0, END)
-            self.defT.delete(1.0, END)
+            self.reset()
+
     def button_menu_state_change(self):
         """ change buttons and menus after lexicon creation or after load"""
         self.wordT.config(state="normal")
@@ -152,6 +153,10 @@ class LexiconCreator():
         self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent=self.master)
         while self.createlex is None or (not self.createlex.strip()): 
             self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent=self.master)
+    def createlexiconcsv(self):
+        with open(str(self.createlex)+str(".csv"), 'a+') as d:
+            thewriter = csv.writer(d)
+            thewriter.writerow(['Word', 'Definition'])
     def create_l(self):
         """ creates a lexicon(.csv file)"""
         if  self.createlex != "":
@@ -159,9 +164,7 @@ class LexiconCreator():
         else:
             self.createlexiconuserinput()
             if not os.path.exists(self.createlex+str(".csv")):
-                with open(str(self.createlex)+str(".csv"), 'a+') as d:
-                    thewriter = csv.writer(d)
-                    thewriter.writerow(['Word', 'Definition'])
+                self.createlexiconcsv()
                 msg.showinfo("SUCCESS", "THE FILE CREATED SUCCESSFULLY")
                 self.button_menu_state_change()
             else:
