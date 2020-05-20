@@ -13,6 +13,12 @@ def helpmenu():
 def aboutmenu():
     """ about menu """
     msg.showinfo("About", "Version 1.0")
+def foldercreation(filename):
+    if not os.path.exists(filename):
+        os.mkdir(filename)
+        os.chdir(filename)
+    else:
+        os.chdir(filename)
 class LexiconCreator():
     """
     Lexicon Creator Class
@@ -22,11 +28,7 @@ class LexiconCreator():
         self.master.title("Lexicon Creator")
         self.master.geometry("250x220")
         self.master.resizable(False, False)
-        if not os.path.exists("Lexicons"):
-            os.mkdir("Lexicons")
-            os.chdir("Lexicons")
-        else:
-            os.chdir("Lexicons")
+        foldercreation("Lexicons")
         self.createlex = ""
         self.wordlabel = Label(self.master, text="Word",)
         self.wordlabel.pack()
