@@ -16,9 +16,7 @@ def aboutmenu():
 def foldercreation(filename):
     if not os.path.exists(filename):
         os.mkdir(filename)
-        os.chdir(filename)
-    else:
-        os.chdir(filename)
+    os.chdir(filename)
 class LexiconCreator():
     """
     Lexicon Creator Class
