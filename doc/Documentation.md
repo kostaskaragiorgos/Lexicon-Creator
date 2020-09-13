@@ -50,3 +50,11 @@ if a lexicon is created or loaded a window pops up showing the words and the def
 else an error message pops up
 
 <p><img src ="doc images/Show menu/lexicon error.png" title="Show Lexicon Error message"/> </p>
+
+# About menu
+
+## About
+
+You can show info about the app by using menu About --> About or using Ctrl+i keybind
+
+<p><img src="doc images/About menu/about menu.png" title="about menu"/></p>
