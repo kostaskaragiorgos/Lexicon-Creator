@@ -1,19 +1,25 @@
 """
 You can create your own lexicon and save it to a .csv file
-""" 
+"""
 from tkinter import Label, Text, Button, Menu, Tk, END
 from tkinter import messagebox as msg
 from tkinter import simpledialog
-import os 
+import os
 import csv
 import pandas as pd
 def helpmenu():
     """ help menu """
-    msg.showinfo("Help", "Create or load a lexicon from the file menu. Add the word and its definition to the lexicon")
+    msg.showinfo("Help",
+                 "Create or load a lexicon from the file menu." +
+                 "Add the word and its definition to the lexicon")
 def aboutmenu():
     """ about menu """
     msg.showinfo("About", "Version 1.0")
 def foldercreation(filename):
+    """ creates a folder based on a filename.
+    Args:
+        filename: the file name
+    """
     if not os.path.exists(filename):
         os.mkdir(filename)
     os.chdir(filename)
@@ -36,19 +42,23 @@ class LexiconCreator():
         self.deflablel.pack()
         self.defT = Text(self.master, height=4, state="disabled")
         self.defT.pack()
-        self.cleardb = Button(self.master, text="Clear Definition", state="disabled", command=self.cleardf)
+        self.cleardb = Button(self.master, text="Clear Definition",
+                              state="disabled", command=self.cleardf)
         self.cleardb.pack()
-        self.clearwb = Button(self.master, text="Clear Word", state="disabled", command=self.clearwf)
+        self.clearwb = Button(self.master, text="Clear Word",
+                              state="disabled", command=self.clearwf)
         self.clearwb.pack()
         self.addb = Button(self.master, text="Add", state="disabled", command=self.addw)
         self.addb.pack()
         #menu
         self.menu = Menu(self.master)
         self.file_menu = Menu(self.menu, tearoff=0)
-        self.file_menu.add_command(label="Create Lexicon", accelerator='Ctrl+N', command=self.create_l)
+        self.file_menu.add_command(label="Create Lexicon",
+                                   accelerator='Ctrl+N', command=self.create_l)
         self.file_menu.add_command(label="Load Lexicon", accelerator='Ctrl+L', command=self.load_l)
         self.file_menu.add_command(label="Add Word", accelerator='Ctrl+O', command=self.addw)
-        self.file_menu.add_command(label="Close File", accelerator='Ctrl+F4', command=self.cfile, state="disabled")
+        self.file_menu.add_command(label="Close File", accelerator='Ctrl+F4',
+                                   command=self.cfile, state="disabled")
         self.file_menu.add_command(label="Exit", accelerator='Alt+F4', command=self.exitmenu)
         self.menu.add_cascade(label="File", menu=self.file_menu)
         self.edimenu = Menu(self.menu, tearoff=0)
@@ -58,7 +68,8 @@ class LexiconCreator():
         self.edimenu.add_command(label="Delete Word", accelerator='Ctrl+D', command=self.deleteword)
         self.menu.add_cascade(label="Edit", menu=self.edimenu)
         self.showmenu = Menu(self.menu, tearoff=0)
-        self.showmenu.add_command(label="Show Lexicon", accelerator='Ctrl+T', command=self.showlexicon)
+        self.showmenu.add_command(label="Show Lexicon", accelerator='Ctrl+T',
+                                  command=self.showlexicon)
         self.menu.add_cascade(label="Show", menu=self.showmenu)
         self.about_menu = Menu(self.menu, tearoff=0)
         self.about_menu.add_command(label="About", accelerator='Ctrl+I', command=aboutmenu)
@@ -125,6 +136,7 @@ class LexiconCreator():
             self.file_menu.entryconfig("Close File", state="disable")
             msg.showinfo("SUCCESS", "FILE CLOASED")
     def add_word_to_lexicon_file(self):
+        """ saves a word to the lexicon file """
         with open(str(self.createlex)+str('.csv'), 'a+') as f:
             thewriter = csv.writer(f)
             thewriter.writerow([str(self.wordT.get(1.0, END)), self.defT.get(1.0, END)])
@@ -135,7 +147,9 @@ class LexiconCreator():
             self.reset()
         else:
             self.add_word_to_lexicon_file()
-            msg.showinfo("Word info", "Word: "+str(self.wordT.get(1.0, END))+"Definition: "+self.defT.get(1.0, END))
+            msg.showinfo("Word info",
+                         "Word: "+str(self.wordT.get(1.0, END))+
+                         "Definition: "+self.defT.get(1.0, END))
             self.reset()
 
     def button_menu_state_change(self):
@@ -150,10 +164,15 @@ class LexiconCreator():
         self.file_menu.entryconfig("Load Lexicon", state="disabled")
     def createlexiconuserinput(self):
         """ create lexicon menu user input"""
-        self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent=self.master)
+        self.createlex = simpledialog.askstring("NEW LEXICON",
+                                                "Enter the name of the new lexicon",
+                                                parent=self.master)
         while self.createlex is None or (not self.createlex.strip()): 
-            self.createlex = simpledialog.askstring("NEW LEXICON", "Enter the name of the new lexicon", parent=self.master)
+            self.createlex = simpledialog.askstring("NEW LEXICON",
+                                                    "Enter the name of the new lexicon",
+                                                    parent=self.master)
     def createlexiconcsv(self):
+        """ creates the lexicon file """
         with open(str(self.createlex)+str(".csv"), 'a+') as d:
             thewriter = csv.writer(d)
             thewriter.writerow(['Word', 'Definition'])
@@ -172,9 +191,12 @@ class LexiconCreator():
                 self.createlex = ""
     def load_l_user_input(self):
         """ load menu user input """
-        self.loadlex = simpledialog.askstring("LOAD LEXICON", "Enter the name  of the lexicon you want to load (Case sensitive)")
+        self.loadlex = simpledialog.askstring("LOAD LEXICON",
+                                              "Enter the name  of the lexicon you want to load (Case sensitive)")
         while self.loadlex is None: 
-            self.loadlex = simpledialog.askstring("LOAD LEXICON", "Enter the name of the lexicon you want to load (Case sensitive)", parent=self.master)
+            self.loadlex = simpledialog.askstring("LOAD LEXICON",
+                                                  "Enter the name of the lexicon you want to load (Case sensitive)",
+                                                  parent=self.master)
     def load_l(self):
         """loads a lexicon(.csv file)"""
         if  self.createlex != "":
@@ -182,7 +204,7 @@ class LexiconCreator():
         else:
             self.load_l_user_input()
             if str(self.loadlex+".csv") in os.listdir():
-                self.createlex = self.loadlex 
+                self.createlex = self.loadlex
                 msg.showinfo("SUCCESS", "THE FILE LOADED SUCCESSFULLY")
                 self.button_menu_state_change()
             else:
